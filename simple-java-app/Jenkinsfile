@@ -1,18 +1,20 @@
 pipeline {
-  agent {
-    docker { image 'maven:3.9.4-eclipse-temurin-17' 
-             args '-v /root/.m2:/root/.m2'
+    agent {
+        docker {
+            image 'maven:3.9.4-eclipse-temurin-17'
+            args '-v /root/.m2:/root/.m2'
         }
-  }
-  stages {
-    stage('Build') {
-      steps {
-       script {
-              // Assuming the source code is checked out in 'my-app' directory
-              dir('simple-java-app') {
-                    sh 'docker run -it --rm -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven maven:3.9.4-eclipse-temurin-17 mvn clean package'
-               }
-      }
     }
-  }
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    // Assuming the source code is checked out in 'simple-java-app' directory
+                    dir('simple-java-app') {
+                        sh 'mvn clean package'
+                    }
+                }
+            }
+        }
+    }
 }
