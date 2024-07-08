@@ -9,7 +9,7 @@ pipeline {
       steps {
        script {
               // Assuming the source code is checked out in 'my-app' directory
-              dir('my-app') {
+              dir('simple-java-app') {
                     sh 'docker run -it --rm -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven maven:3.9.4-eclipse-temurin-17 mvn clean package'
                }
       }
